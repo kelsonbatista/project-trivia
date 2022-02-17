@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import './style.css';
-import { fetchToken } from '../../services/token';
+import fetchToken from '../../services/token';
+import requestToken from '../../store/actions';
 
-function Login() {
+function Login(props) {
   const [user, setUser] = useState({
     name: '',
     email: '',
   });
-  // const history = useHistory();
+  const history = useHistory();
 
   function handleChange({ target: { name, value } }) {
     setUser({
@@ -21,9 +23,11 @@ function Login() {
   }
 
   async function handleClick() {
-    await console.log(fetchToken());
-    console.log('handleClick Login');
-    // history.push('/game');
+    const { dispatchToken } = props;
+    const tokenInfo = await fetchToken();
+    localStorage.setItem('token', JSON.stringify(tokenInfo.token));
+    dispatchToken(tokenInfo.token);
+    history.push('/game');
   }
 
   return (
@@ -66,6 +70,11 @@ function Login() {
 
 Login.propTypes = {
   history: PropTypes.instanceOf(Object),
+  dispatchToken: PropTypes.func,
 }.isRequired;
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  dispatchToken: (tokenInfo) => dispatch(requestToken(tokenInfo)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);

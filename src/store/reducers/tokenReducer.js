@@ -1,19 +1,14 @@
-import REQUEST_TOKEN from '../actions/tokenActions';
+import { REQUEST_TOKEN } from '../actions/tokenActions';
 
-const INITIAL_STATE = {
-  tokenInfo: {},
-};
+const INITIAL_STATE = '';
 
-const tokenReducer = (state = INITIAL_STATE, action) => {
+const token = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case REQUEST_TOKEN:
-    return {
-      ...state,
-      tokenInfo: action.payload,
-    };
+    return action.payload;
   default:
     return state;
   }
 };
 
-export default tokenReducer;
+export default token;
