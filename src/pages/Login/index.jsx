@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import './style.css';
@@ -13,6 +13,7 @@ function Login(props) {
     name: '',
     email: '',
   });
+
   const history = useHistory();
 
   function handleChange({ target: { name, value } }) {
