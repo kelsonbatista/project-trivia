@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Input() {
+function Input(props) {
   const {
     classDiv,
+    className,
     dataTestid,
     id,
     label,
@@ -19,6 +20,7 @@ function Input() {
       <label htmlFor={ id }>
         {label}
         <input
+          className={ className }
           data-testid={ dataTestid }
           id={ id }
           name={ name }
@@ -34,6 +36,7 @@ function Input() {
 
 Input.propTypes = {
   classDiv: PropTypes.string,
+  className: PropTypes.string,
   dataTestid: PropTypes.string,
   id: PropTypes.string,
   label: PropTypes.string,

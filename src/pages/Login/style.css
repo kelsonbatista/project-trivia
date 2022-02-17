@@ -1,0 +1,24 @@
+.login {
+  margin-top: 15px;
+}
+
+.login__name, .login__email {
+  height: 25px;
+  max-width: 80vw;
+  width: 350px;
+}
+
+.login__button {
+  background: rgb(67, 67, 174);
+  border: none;
+  color: white;
+  font-weight: 700;
+  height: 35px;
+  margin-top: 18px;
+  max-width: 80vw;
+  width: 359px;
+}
+
+.disabled {
+  background: #aaa;
+}
