@@ -1,22 +1,30 @@
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import addToken from '../store/actions';
+import requestToken from '../store/actions';
 
-const requestToken = (props) => {
+// export const fetchToken = (props) => {
+//   const { dispatchToken } = props;
+//   const tokenRequestUrl = 'https://opentdb.com/api_token.php?command=request';
+//   fetch(tokenRequestUrl)
+//     .then((result) => result.json())
+//     .then((data) => dispatchToken(JSON.stringify(data)))
+//     .catch((error) => `Error found: ${error}`);
+// };
+
+export const fetchToken = async (props) => {
   const { dispatchToken } = props;
   const tokenRequestUrl = 'https://opentdb.com/api_token.php?command=request';
-  fetch(tokenRequestUrl)
-    .then((result) => result.json())
-    .then((data) => dispatchToken(data))
-    .catch((error) => `Error found: ${error}`);
+  const response = await fetch(tokenRequestUrl);
+  const data = await response.json();
+  dispatchToken(data);
 };
 
-requestToken.propTypes = {
-  dispatchToken: PropTypes.object,
+fetchToken.propTypes = {
+  dispatchToken: PropTypes.func,
 }.isRequired;
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatchToken: (tokenInfo) => dispatch(addToken(tokenInfo)),
+  dispatchToken: (tokenInfo) => dispatch(requestToken(tokenInfo)),
 });
 
-export default connect(null, mapDispatchToProps)(requestToken);
+export default connect(null, mapDispatchToProps)(fetchToken);

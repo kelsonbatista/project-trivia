@@ -1,3 +1,3 @@
-import addToken from './tokenActions';
+import requestToken from './tokenActions';
 
-export default addToken;
+export default requestToken;

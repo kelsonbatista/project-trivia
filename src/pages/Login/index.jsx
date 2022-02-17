@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import './style.css';
-import requestToken from '../../services/token';
+import { fetchToken } from '../../services/token';
 
 function Login() {
   const [user, setUser] = useState({
     name: '',
     email: '',
   });
-  const history = useHistory();
+  // const history = useHistory();
 
   function handleChange({ target: { name, value } }) {
     setUser({
@@ -20,7 +20,11 @@ function Login() {
     });
   }
 
-  // requestToken();
+  function handleClick() {
+    fetchToken();
+    console.log('requesttoken');
+    // history.push('/game');
+  }
 
   return (
     <>
@@ -52,7 +56,7 @@ function Login() {
         disabled={ !user.name || !user.email }
         id="loginbtn"
         name="login-btn"
-        onClick={ () => history.push('/game') }
+        onClick={ () => handleClick() }
         text="Play"
         type="button"
       />

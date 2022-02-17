@@ -1,8 +1,8 @@
-export const ADD_TOKEN = 'ADD_TOKEN';
+export const REQUEST_TOKEN = 'REQUEST_TOKEN';
 
-const addToken = (payload) => ({
-  type: ADD_TOKEN,
+const requestToken = (payload) => ({
+  type: REQUEST_TOKEN,
   payload,
 });
 
-export default addToken;
+export default requestToken;
