@@ -5,8 +5,6 @@ import Button from '../../components/Button';
 import './style.css';
 
 function Login(props) {
-  const { history } = props;
-
   const [user, setUser] = useState({
     name: '',
     email: '',
@@ -20,6 +18,7 @@ function Login(props) {
   }
 
   function handleClick() {
+    const { history } = props;
     history.push('/game');
   }
 
