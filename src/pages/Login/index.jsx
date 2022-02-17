@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import './style.css';
+import requestToken from '../../services/token';
 
 function Login() {
   const [user, setUser] = useState({
@@ -18,6 +19,8 @@ function Login() {
       [name]: value,
     });
   }
+
+  // requestToken();
 
   return (
     <>
