@@ -1,25 +1,22 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import './style.css';
 
-function Login(props) {
+function Login() {
   const [user, setUser] = useState({
     name: '',
     email: '',
   });
+  const history = useHistory();
 
   function handleChange({ target: { name, value } }) {
     setUser({
       ...user,
       [name]: value,
     });
-  }
-
-  function handleClick() {
-    const { history } = props;
-    history.push('/game');
   }
 
   return (
@@ -52,7 +49,7 @@ function Login(props) {
         disabled={ !user.name || !user.email }
         id="loginbtn"
         name="login-btn"
-        onClick={ () => handleClick() }
+        onClick={ () => history.push('/game') }
         text="Play"
         type="button"
       />
