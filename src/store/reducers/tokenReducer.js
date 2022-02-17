@@ -1,4 +1,4 @@
-import { REQUEST_TOKEN } from '../actions/tokenActions';
+import REQUEST_TOKEN from '../actions/tokenActions';
 
 const INITIAL_STATE = {
   tokenInfo: {},

@@ -20,9 +20,9 @@ function Login() {
     });
   }
 
-  function handleClick() {
-    fetchToken();
-    console.log('requesttoken');
+  async function handleClick() {
+    await console.log(fetchToken());
+    console.log('handleClick Login');
     // history.push('/game');
   }
 
