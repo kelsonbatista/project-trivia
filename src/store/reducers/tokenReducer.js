@@ -2,7 +2,7 @@ import { REQUEST_TOKEN } from '../actions/tokenActions';
 
 const INITIAL_STATE = '';
 
-const token = (state = INITIAL_STATE, action) => {
+const tokenReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case REQUEST_TOKEN:
     return action.payload;
@@ -11,4 +11,4 @@ const token = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default token;
+export default tokenReducer;

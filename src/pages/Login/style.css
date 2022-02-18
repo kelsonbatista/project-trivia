@@ -1,9 +1,12 @@
 .login {
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 .login__name, .login__email {
-  height: 25px;
+  color: black;
+  font-size: 1.8rem;
+  font-weight: 400;
+  height: 4rem;
   max-width: 80vw;
   width: 350px;
 }
@@ -12,11 +15,12 @@
   background: rgb(67, 67, 174);
   border: none;
   color: white;
+  font-size: 1.8rem;
   font-weight: 700;
   height: 35px;
-  margin-top: 18px;
+  margin-top: 10px;
   max-width: 80vw;
-  width: 359px;
+  width: 350px;
 }
 
 .disabled {
@@ -26,9 +30,10 @@
 .settings__button {
   background: rgb(128, 255, 44);
   border: none;
+  font-size: 1.8rem;
   font-weight: 700;
   height: 35px;
-  margin-top: 18px;
+  margin-top: 15px;
   max-width: 80vw;
-  width: 359px;
+  width: 350px;
 }

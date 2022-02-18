@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import md5 from 'crypto-js/md5';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import './style.css';
 import fetchToken from '../../services/token';
-import requestToken from '../../store/actions';
+import { requestToken, setPlayer } from '../../store/actions';
 
 function Login(props) {
   const [user, setUser] = useState({
@@ -15,6 +16,7 @@ function Login(props) {
   });
 
   const history = useHistory();
+  const { dispatchPlayer, dispatchToken } = props;
 
   function handleChange({ target: { name, value } }) {
     setUser({
@@ -23,11 +25,22 @@ function Login(props) {
     });
   }
 
+  function handlePlayer() {
+    const hash = md5(user.email).toString();
+    const player = {
+      name: user.name,
+      assertions: 0,
+      score: 0,
+      gravatarEmail: `https://www.gravatar.com/avatar/${hash}`,
+    };
+    dispatchPlayer(player);
+  }
+
   async function handleClick() {
-    const { dispatchToken } = props;
     const tokenInfo = await fetchToken();
     localStorage.setItem('token', JSON.stringify(tokenInfo.token));
     dispatchToken(tokenInfo.token);
+    handlePlayer();
     history.push('/game');
   }
 
@@ -81,10 +94,12 @@ function Login(props) {
 Login.propTypes = {
   history: PropTypes.instanceOf(Object),
   dispatchToken: PropTypes.func,
+  dispatchPlayer: PropTypes.func,
 }.isRequired;
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchToken: (tokenInfo) => dispatch(requestToken(tokenInfo)),
+  dispatchPlayer: (player) => dispatch(setPlayer(player)),
 });
 
 export default connect(null, mapDispatchToProps)(Login);

@@ -1,3 +1,7 @@
 import requestToken from './tokenActions';
+import setPlayer from './playerActions';
 
-export default requestToken;
+export {
+  requestToken,
+  setPlayer,
+};
