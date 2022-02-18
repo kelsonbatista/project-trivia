@@ -1,14 +1,14 @@
 import React from 'react';
 import '../../App.css';
 
-function Game() {
+function Settings() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Game</h1>
+        <h1 data-testid="settings-title">Settings</h1>
       </header>
     </div>
   );
 }
 
-export default Game;
+export default Settings;

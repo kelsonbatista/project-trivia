@@ -65,6 +65,15 @@ function Login(props) {
         text="Play"
         type="button"
       />
+      <Button
+        className="settings__button"
+        dataTestid="btn-settings"
+        id="settingsbtn"
+        name="settings-btn"
+        onClick={ () => history.push('/settings') }
+        text="Settings"
+        type="button"
+      />
     </>
   );
 }

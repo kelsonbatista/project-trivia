@@ -22,3 +22,13 @@
 .disabled {
   background: #aaa;
 }
+
+.settings__button {
+  background: rgb(128, 255, 44);
+  border: none;
+  font-weight: 700;
+  height: 35px;
+  margin-top: 18px;
+  max-width: 80vw;
+  width: 359px;
+}
