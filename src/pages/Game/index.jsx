@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import fetchTriviaApi from '../../services/triviaApi';
 import TableApp from '../../components/Table';
 import Button from '../../components/Button';
-import { requestToken } from '../../store/actions';
+import { requestToken, setPlayer } from '../../store/actions';
 import fetchToken from '../../services/token';
 import Loading from '../../components/Loading';
 import './style.css';
@@ -18,13 +18,18 @@ function Game(props) {
   const THIRTY = 30;
   const THOUSAND = 1000;
   const interval = useRef();
-  const { dispatchToken, player: { name, gravatarEmail }, token } = props;
+  const { dispatchPlayer, dispatchToken, player: { name, gravatarEmail }, token } = props;
   const [questions, setQuestions] = useState([]);
   const [index, setIndex] = useState(0);
   const [timer, setTimer] = useState(THIRTY);
-  const [score, setScore] = useState(0);
   const [disabled, setDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [player, setPlayerState] = useState({
+    name,
+    assertions: 0,
+    score: 0,
+    gravatarEmail,
+  });
   const [answers, setAnswers] = useState({
     correct: '',
     incorrect: [],
@@ -77,15 +82,23 @@ function Game(props) {
     }
   }
 
+  function calcScore() {
+    const level = questions[index].difficulty;
+    if (level === 'hard') return THREE;
+    if (level === 'medium') return TWO;
+    return ONE;
+  }
+
   function handleClick({ target }) {
     const id = target.getAttribute('data-testid').includes('correct');
     if (id) {
-      const level = questions[index].difficulty;
-      if (level === 'hard') () => setScore(TEN + (timer * THREE));
-      else if (level === 'medium') setScore(TEN + (timer * TWO));
-      else setScore(TEN + (timer * ONE));
-      console.log(score, 'score');
+      setPlayerState(() => ({ ...player,
+        assertions: player.assertions + 1,
+        score: player.score + (TEN + (timer * calcScore())),
+      }));
     }
+    dispatchPlayer(player);
+    console.log(player);
     console.log('click');
   }
 
@@ -107,7 +120,7 @@ function Game(props) {
         <h1>TRIVIA</h1>
         <TableApp
           name={ name }
-          score={ score }
+          score={ player.score }
           gravatarEmail={ gravatarEmail }
         />
       </header>
@@ -153,7 +166,11 @@ function Game(props) {
                 );
               })}
             </div>
-            <div>{ disabled && <p className="msg__wrong">Resposta errada :(</p> }</div>
+            <div>
+              { disabled
+                ? <p className="msg__wrong">Tempo esgotado! Resposta inválida.</p>
+                : <p className="msg__correct">{ `Pontos: ${player.score}` }</p>}
+            </div>
           </div>
         )}
       </main>
@@ -174,6 +191,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchToken: (tokenInfo) => dispatch(requestToken(tokenInfo)),
+  dispatchPlayer: (player) => dispatch(setPlayer(player)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);
