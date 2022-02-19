@@ -22,7 +22,7 @@ const FEEDBACK_TEXT_SELECTOR = '[data-testid="feedback-text"]';
 const PLAYER_NAME = 'Nome da pessoa';
 const PLAYER_EMAIL = 'email@pessoa.com';
 
-describe.only('4 - [TELA DE JOGO] Crie um _header_ que deve conter as informações da pessoa jogadora', () => {
+describe('4 - [TELA DE JOGO] Crie um _header_ que deve conter as informações da pessoa jogadora', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/', {
       onBeforeLoad(win) {
@@ -116,7 +116,7 @@ describe('5 - [TELA DE JOGO] Crie a página de jogo que deve conter as informaç
   });
 });
 
-describe('6 - [TELA DE JOGO] Desenvolva o jogo onde só deve ser possível escolher uma resposta correta por pergunta', () => {
+describe.only('6 - [TELA DE JOGO] Desenvolva o jogo onde só deve ser possível escolher uma resposta correta por pergunta', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/', {
       onBeforeLoad(win) {

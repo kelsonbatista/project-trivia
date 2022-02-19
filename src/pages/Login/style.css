@@ -4,9 +4,9 @@
 
 .login__name, .login__email {
   color: black;
-  font-size: 1.8rem;
+  font-size: 1rem;
   font-weight: 400;
-  height: 4rem;
+  height: 1.8rem;
   max-width: 80vw;
   width: 350px;
 }
@@ -15,12 +15,12 @@
   background: rgb(67, 67, 174);
   border: none;
   color: white;
-  font-size: 1.8rem;
+  font-size: 1rem;
   font-weight: 700;
   height: 35px;
   margin-top: 10px;
   max-width: 80vw;
-  width: 350px;
+  width: 359px;
 }
 
 .disabled {
@@ -30,10 +30,10 @@
 .settings__button {
   background: rgb(128, 255, 44);
   border: none;
-  font-size: 1.8rem;
+  font-size: 1rem;
   font-weight: 700;
   height: 35px;
   margin-top: 15px;
   max-width: 80vw;
-  width: 350px;
+  width: 359px;
 }
