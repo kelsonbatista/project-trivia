@@ -5,7 +5,7 @@ import TableApp from '../../components/Table';
 import { THREE } from '../../commons/constants';
 
 function Feedback(props) {
-  const { player: { name, assertions, score, gravatarEmail } } = props;
+  const { player: { name, assertions, score, total, gravatarEmail } } = props;
 
   function checkAssertions() {
     if (assertions < THREE) return 'Could be better...';
@@ -21,6 +21,18 @@ function Feedback(props) {
         gravatarEmail={ gravatarEmail }
       />
       <h3 data-testid="feedback-text">{ checkAssertions() }</h3>
+      <p>
+        <span>Pontos: </span>
+        <span data-testid="feedback-total-score">{ score }</span>
+      </p>
+      <p>
+        <span>Total: </span>
+        <span data-testid="feedback-total">{ total }</span>
+      </p>
+      <p>
+        <span>Acertos: </span>
+        <span data-testid="feedback-total-question">{ assertions }</span>
+      </p>
     </section>
   );
 }

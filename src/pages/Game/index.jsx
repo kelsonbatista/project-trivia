@@ -14,7 +14,7 @@ import './style.css';
 function Game(props) {
   const interval = useRef();
   const { dispatchPlayer, dispatchToken, history,
-    player: { name, assertions, score, gravatarEmail }, token } = props;
+    player: { name, assertions, score, total, gravatarEmail }, token } = props;
   const [questions, setQuestions] = useState([]);
   const [countQuestions, setCountQuestions] = useState(0);
   const [index, setIndex] = useState(0);
@@ -90,7 +90,8 @@ function Game(props) {
       const player = {
         name,
         assertions: assertions + 1,
-        score: score + (TEN + (timer * calcScore())),
+        score: TEN + (timer * calcScore()),
+        total: total + (TEN + (timer * calcScore())),
         gravatarEmail,
       };
       dispatchPlayer(player);
@@ -187,7 +188,7 @@ function Game(props) {
                 && <p className="msg__wrong">Infelizmente você errou!</p>}
               { (disabled && answerCorrect)
               && <p className="msg__right">Parabéns! Você acertou!</p>}
-              <p className="msg__correct">{ `Pontuação: ${score}` }</p>
+              <p className="msg__correct">{ `Pontos: ${score} / Total: ${total}` }</p>
             </div>
             <div>
               { disabled && (

@@ -31,6 +31,7 @@ function Login(props) {
       name: user.name,
       assertions: 0,
       score: 0,
+      total: 0,
       gravatarEmail: `https://www.gravatar.com/avatar/${hash}`,
     };
     dispatchPlayer(player);

@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   name: '',
   assertions: 0,
   score: 0,
+  total: 0,
   gravatarEmail: '',
 };
 
