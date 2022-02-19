@@ -10,15 +10,19 @@ import Loading from '../../components/Loading';
 import './style.css';
 
 function Game(props) {
-  const NOT_FOUND = 3;
-  const ONE_SECOND = 1000;
+  const HALF = 0.5;
+  const ONE = 1;
+  const TWO = 2;
+  const THREE = 3;
+  const TEN = 10;
   const THIRTY = 30;
-  const FIFTYCENT = 0.5;
+  const THOUSAND = 1000;
   const interval = useRef();
-  const { dispatchToken, player: { name, score, gravatarEmail }, token } = props;
+  const { dispatchToken, player: { name, gravatarEmail }, token } = props;
   const [questions, setQuestions] = useState([]);
   const [index, setIndex] = useState(0);
   const [timer, setTimer] = useState(THIRTY);
+  const [score, setScore] = useState(0);
   const [disabled, setDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
   const [answers, setAnswers] = useState({
@@ -30,7 +34,7 @@ function Game(props) {
   async function handleTrivia() {
     setLoading(true);
     let fetchTrivia = await fetchTriviaApi(token);
-    if (fetchTrivia.response_code === NOT_FOUND) {
+    if (fetchTrivia.response_code === THREE) {
       const tokenInfo = await fetchToken();
       dispatchToken(tokenInfo.token);
       fetchTrivia = await fetchTriviaApi(tokenInfo.token);
@@ -47,7 +51,7 @@ function Game(props) {
       } = questions[index];
       // https://flaviocopes.com/how-to-shuffle-array-javascript/
       let all = [correct, ...incorrect];
-      all = all.sort(() => Math.random() - FIFTYCENT);
+      all = all.sort(() => Math.random() - HALF);
       setAnswers({
         ...answers,
         correct,
@@ -62,7 +66,7 @@ function Game(props) {
     function runTimer() {
       interval.current = setInterval(() => {
         setTimer((count) => count - 1);
-      }, ONE_SECOND);
+      }, THOUSAND);
     }
     if (timer <= 0 && interval.current) {
       setDisabled(true);
@@ -73,7 +77,15 @@ function Game(props) {
     }
   }
 
-  function handleClick() {
+  function handleClick({ target }) {
+    const id = target.getAttribute('data-testid').includes('correct');
+    if (id) {
+      const level = questions[index].difficulty;
+      if (level === 'hard') () => setScore(TEN + (timer * THREE));
+      else if (level === 'medium') setScore(TEN + (timer * TWO));
+      else setScore(TEN + (timer * ONE));
+      console.log(score, 'score');
+    }
     console.log('click');
   }
 
@@ -120,7 +132,7 @@ function Game(props) {
                         className="correct"
                         dataTestid="correct-answer"
                         disabled={ disabled }
-                        onClick={ () => handleClick() }
+                        onClick={ (event) => handleClick(event) }
                         text={ answers.correct }
                         type="button"
                       />
@@ -133,7 +145,7 @@ function Game(props) {
                       className="incorrect"
                       dataTestid={ `wrong-answer-${item}` }
                       disabled={ disabled }
-                      onClick={ () => handleClick() }
+                      onClick={ (event) => handleClick(event) }
                       text={ answer }
                       type="button"
                     />
