@@ -15,6 +15,7 @@ function TableApp(props) {
               data-testid="header-profile-picture"
               src={ gravatarEmail }
             />
+            <span data-testid="input-gravatar-email">&nbsp;</span>
           </td>
           <td><span data-testid="header-player-name">{ name }</span></td>
           <td><span data-testid="header-score">{ score }</span></td>

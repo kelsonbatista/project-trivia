@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import TableApp from '../../components/Table';
+import Button from '../../components/Button';
 import { THREE } from '../../commons/constants';
 
 function Feedback(props) {
@@ -33,6 +34,15 @@ function Feedback(props) {
         <span>Acertos: </span>
         <span data-testid="feedback-total-question">{ assertions }</span>
       </p>
+      <div>
+        <Button
+          className="playagain__btn"
+          dataTestid="btn-play-again"
+          onClick={ () => {} }
+          text="Play Again"
+          type="button"
+        />
+      </div>
     </section>
   );
 }
