@@ -7,17 +7,11 @@ import Button from '../../components/Button';
 import { requestToken, setPlayer } from '../../store/actions';
 import fetchToken from '../../services/token';
 import Loading from '../../components/Loading';
+import { HALF, ONE, TWO, THREE, FOUR,
+  TEN, THIRTY, THOUSAND } from '../../commons/constants';
 import './style.css';
 
 function Game(props) {
-  const HALF = 0.5;
-  const ONE = 1;
-  const TWO = 2;
-  const THREE = 3;
-  const FOUR = 4;
-  const TEN = 10;
-  const THIRTY = 30;
-  const THOUSAND = 1000;
   const interval = useRef();
   const { dispatchPlayer, dispatchToken, history,
     player: { name, assertions, score, gravatarEmail }, token } = props;

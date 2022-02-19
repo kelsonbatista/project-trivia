@@ -2,9 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import TableApp from '../../components/Table';
+import { THREE } from '../../commons/constants';
 
 function Feedback(props) {
-  const { player: { name, score, gravatarEmail } } = props;
+  const { player: { name, assertions, score, gravatarEmail } } = props;
+
+  function checkAssertions() {
+    if (assertions < THREE) return 'Could be better...';
+    return 'Well Done!';
+  }
+
   return (
     <section className="feedback">
       <h1>Feedback</h1>
@@ -13,7 +20,7 @@ function Feedback(props) {
         score={ score }
         gravatarEmail={ gravatarEmail }
       />
-      <h3 data-testid="feedback-text">Message</h3>
+      <h3 data-testid="feedback-text">{ checkAssertions() }</h3>
     </section>
   );
 }
