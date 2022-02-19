@@ -23,14 +23,11 @@ function Game(props) {
   const [questions, setQuestions] = useState([]);
   const [index, setIndex] = useState(0);
   const [timer, setTimer] = useState(THIRTY);
+  const [timeEnd, setTimeEnd] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
-  // const [player, setPlayerState] = useState({
-  //   name,
-  //   assertions: 0,
-  //   score: 0,
-  //   gravatarEmail,
-  // });
+  const [answerIncorrect, setAnswerIncorrect] = useState(false);
+  const [answerCorrect, setAnswerCorrect] = useState(false);
   const [answers, setAnswers] = useState({
     correct: '',
     incorrect: [],
@@ -76,6 +73,7 @@ function Game(props) {
     }
     if (timer <= 0 && interval.current) {
       setDisabled(true);
+      setTimeEnd(true);
       clearInterval(interval.current);
     }
     if (timer === THIRTY) {
@@ -91,8 +89,8 @@ function Game(props) {
   }
 
   function handleClick({ target }) {
-    const id = target.getAttribute('data-testid').includes('correct');
-    if (id) {
+    const correct = target.getAttribute('data-testid').includes('correct');
+    if (correct) {
       const player = {
         name,
         assertions: assertions + 1,
@@ -100,7 +98,20 @@ function Game(props) {
         gravatarEmail,
       };
       dispatchPlayer(player);
+      setAnswerCorrect(true);
+    } else {
+      setAnswerIncorrect(true);
     }
+    setDisabled(true);
+    clearInterval(interval.current);
+  }
+
+  function handleNext() {
+    setIndex(index + 1);
+    setDisabled(false);
+    setAnswerIncorrect(false);
+    setAnswerCorrect(false);
+    setTimer(THIRTY);
   }
 
   useEffect(() => { // did mount
@@ -168,9 +179,24 @@ function Game(props) {
               })}
             </div>
             <div>
-              { disabled
-                ? <p className="msg__wrong">Tempo esgotado! Resposta inválida.</p>
-                : <p className="msg__correct">{ `Pontos: ${score}` }</p>}
+              { (disabled && timeEnd)
+                && <p className="msg__timeup">Tempo esgotado! Resposta inválida.</p>}
+              { (disabled && answerIncorrect)
+                && <p className="msg__wrong">Infelizmente você errou!</p>}
+              { (disabled && answerCorrect)
+              && <p className="msg__right">Parabéns! Você acertou!</p>}
+              <p className="msg__correct">{ `Pontuação: ${score}` }</p>
+            </div>
+            <div>
+              { disabled && (
+                <Button
+                  className="next"
+                  dataTestid="btn-next"
+                  onClick={ () => handleNext() }
+                  text="Next"
+                  type="button"
+                />
+              )}
             </div>
           </div>
         )}
