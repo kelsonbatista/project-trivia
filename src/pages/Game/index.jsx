@@ -14,13 +14,15 @@ function Game(props) {
   const ONE = 1;
   const TWO = 2;
   const THREE = 3;
+  const FOUR = 4;
   const TEN = 10;
   const THIRTY = 30;
   const THOUSAND = 1000;
   const interval = useRef();
-  const { dispatchPlayer, dispatchToken,
+  const { dispatchPlayer, dispatchToken, history,
     player: { name, assertions, score, gravatarEmail }, token } = props;
   const [questions, setQuestions] = useState([]);
+  const [countQuestions, setCountQuestions] = useState(0);
   const [index, setIndex] = useState(0);
   const [timer, setTimer] = useState(THIRTY);
   const [timeEnd, setTimeEnd] = useState(false);
@@ -107,11 +109,17 @@ function Game(props) {
   }
 
   function handleNext() {
+    setCountQuestions(countQuestions + 1);
     setIndex(index + 1);
     setDisabled(false);
     setAnswerIncorrect(false);
     setAnswerCorrect(false);
     setTimer(THIRTY);
+    handleAnswers();
+    if (countQuestions === FOUR) {
+      setCountQuestions(0);
+      history.push('/feedback');
+    }
   }
 
   useEffect(() => { // did mount
@@ -209,6 +217,7 @@ Game.propTypes = {
   name: PropTypes.string,
   score: PropTypes.number,
   token: PropTypes.string,
+  history: PropTypes.instanceOf(Object),
 }.isRequired;
 
 const mapStateToProps = (state) => ({

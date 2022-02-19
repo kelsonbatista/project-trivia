@@ -235,7 +235,7 @@ describe('9 - [TELA DE JOGO] Crie o placar com as seguintes características:', 
   });
 });
 
-describe.only('10 - [TELA DE JOGO] Crie um botão de "Next" que apareça após a resposta ser dada', () => {
+describe('10 - [TELA DE JOGO] Crie um botão de "Next" que apareça após a resposta ser dada', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/', {
       onBeforeLoad(win) {
@@ -263,7 +263,7 @@ describe.only('10 - [TELA DE JOGO] Crie um botão de "Next" que apareça após a
   });
 });
 
-describe('11 - [TELA DE JOGO] Desenvolva o jogo de forma que a pessoa que joga deve responder 5 perguntas no total', () => {
+describe.only('11 - [TELA DE JOGO] Desenvolva o jogo de forma que a pessoa que joga deve responder 5 perguntas no total', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/', {
       onBeforeLoad(win) {
