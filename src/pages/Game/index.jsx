@@ -18,18 +18,19 @@ function Game(props) {
   const THIRTY = 30;
   const THOUSAND = 1000;
   const interval = useRef();
-  const { dispatchPlayer, dispatchToken, player: { name, gravatarEmail }, token } = props;
+  const { dispatchPlayer, dispatchToken,
+    player: { name, assertions, score, gravatarEmail }, token } = props;
   const [questions, setQuestions] = useState([]);
   const [index, setIndex] = useState(0);
   const [timer, setTimer] = useState(THIRTY);
   const [disabled, setDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [player, setPlayerState] = useState({
-    name,
-    assertions: 0,
-    score: 0,
-    gravatarEmail,
-  });
+  // const [player, setPlayerState] = useState({
+  //   name,
+  //   assertions: 0,
+  //   score: 0,
+  //   gravatarEmail,
+  // });
   const [answers, setAnswers] = useState({
     correct: '',
     incorrect: [],
@@ -92,14 +93,14 @@ function Game(props) {
   function handleClick({ target }) {
     const id = target.getAttribute('data-testid').includes('correct');
     if (id) {
-      setPlayerState(() => ({ ...player,
-        assertions: player.assertions + 1,
-        score: player.score + (TEN + (timer * calcScore())),
-      }));
+      const player = {
+        name,
+        assertions: assertions + 1,
+        score: score + (TEN + (timer * calcScore())),
+        gravatarEmail,
+      };
+      dispatchPlayer(player);
     }
-    dispatchPlayer(player);
-    console.log(player);
-    console.log('click');
   }
 
   useEffect(() => { // did mount
@@ -120,7 +121,7 @@ function Game(props) {
         <h1>TRIVIA</h1>
         <TableApp
           name={ name }
-          score={ player.score }
+          score={ score }
           gravatarEmail={ gravatarEmail }
         />
       </header>
@@ -169,7 +170,7 @@ function Game(props) {
             <div>
               { disabled
                 ? <p className="msg__wrong">Tempo esgotado! Resposta inválida.</p>
-                : <p className="msg__correct">{ `Pontos: ${player.score}` }</p>}
+                : <p className="msg__correct">{ `Pontos: ${score}` }</p>}
             </div>
           </div>
         )}
