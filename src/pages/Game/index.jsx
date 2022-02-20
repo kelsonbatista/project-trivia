@@ -85,8 +85,8 @@ function Game(props) {
   }
 
   function handleClick({ target }) {
-    const correct = target.getAttribute('data-testid').includes('correct');
-    if (correct) {
+    const incorrect = target.getAttribute('data-testid').includes('incorrect');
+    if (!incorrect) {
       const player = {
         name,
         assertions: assertions + 1,
@@ -152,34 +152,21 @@ function Game(props) {
             </p>
             <div data-testid="answer-options">
               { /* // https://flaviocopes.com/how-to-shuffle-array-javascript/ */}
-              { answers.all.map((answer, item) => {
-                if (answer === answers.correct) {
-                  return (
-                    <div key={ item }>
-                      <Button
-                        className="correct"
-                        dataTestid="correct-answer"
-                        disabled={ disabled }
-                        onClick={ (event) => handleClick(event) }
-                        text={ answers.correct }
-                        type="button"
-                      />
-                    </div>
-                  );
-                }
-                return (
-                  <div key={ item }>
-                    <Button
-                      className="incorrect"
-                      dataTestid={ `wrong-answer-${item}` }
-                      disabled={ disabled }
-                      onClick={ (event) => handleClick(event) }
-                      text={ answer }
-                      type="button"
-                    />
-                  </div>
-                );
-              })}
+              { answers.all.map((answer, item) => (
+                <Button
+                  className={ (answer === answers.correct
+                    ? 'correct'
+                    : 'incorrect') }
+                  dataTestid={ (answer === answers.correct
+                    ? 'correct-answer'
+                    : `wrong-answer-${item}`) }
+                  disabled={ disabled }
+                  key={ item }
+                  onClick={ (event) => handleClick(event) }
+                  text={ answer }
+                  type="button"
+                />
+              )) }
             </div>
             <div>
               { (disabled && timeEnd)

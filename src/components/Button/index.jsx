@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function Button(props) {
-  const { className, dataTestid, disabled, id, name, onClick, type, text } = props;
+  const { className, dataTestid, disabled, id, key, name, onClick, type, text } = props;
 
   return (
     <button
@@ -10,6 +10,7 @@ function Button(props) {
       data-testid={ dataTestid }
       disabled={ disabled }
       id={ id }
+      key={ key }
       name={ name }
       onClick={ onClick }
       type={ type === 'submit' ? 'submit' : 'button' }
