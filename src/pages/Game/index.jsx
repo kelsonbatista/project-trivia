@@ -85,8 +85,8 @@ function Game(props) {
   }
 
   function handleClick({ target }) {
-    const incorrect = target.getAttribute('data-testid').includes('incorrect');
-    if (!incorrect) {
+    const correct = target.getAttribute('data-testid').includes('correct');
+    if (correct) {
       const player = {
         name,
         assertions: assertions + 1,
