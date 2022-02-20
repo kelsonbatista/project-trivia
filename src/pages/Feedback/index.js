@@ -6,7 +6,7 @@ import Button from '../../components/Button';
 import { THREE } from '../../commons/constants';
 
 function Feedback(props) {
-  const { player: { name, assertions, score, total, gravatarEmail } } = props;
+  const { history, player: { name, assertions, score, total, gravatarEmail } } = props;
 
   function checkAssertions() {
     if (assertions < THREE) return 'Could be better...';
@@ -36,10 +36,17 @@ function Feedback(props) {
       </p>
       <div>
         <Button
-          className="playagain__btn"
+          className="play__btn"
           dataTestid="btn-play-again"
           onClick={ () => {} }
           text="Play Again"
+          type="button"
+        />
+        <Button
+          className="ranking__btn"
+          dataTestid="btn-ranking"
+          onClick={ () => history.push('/ranking') }
+          text="Ranking"
           type="button"
         />
       </div>

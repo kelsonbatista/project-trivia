@@ -5,6 +5,7 @@ import Game from '../pages/Game';
 import NotFound from '../pages/NotFound';
 import Settings from '../pages/Settings';
 import Feedback from '../pages/Feedback';
+import Ranking from '../pages/Ranking';
 
 function RoutesApp() {
   return (
@@ -13,6 +14,7 @@ function RoutesApp() {
       <Route exact path="/game" component={ Game } />
       <Route exact path="/settings" component={ Settings } />
       <Route exact path="/feedback" component={ Feedback } />
+      <Route exact path="/ranking" component={ Ranking } />
       <Route path="*" component={ NotFound } />
     </Switch>
   );
