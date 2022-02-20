@@ -6,7 +6,8 @@ const FOUR = 4;
 const TEN = 10;
 const THIRTY = 30;
 const THOUSAND = 1000;
+const MINUS_ONE = -1;
 
 export {
-  HALF, ONE, TWO, THREE, FOUR, TEN, THIRTY, THOUSAND,
+  HALF, ONE, TWO, THREE, FOUR, TEN, THIRTY, THOUSAND, MINUS_ONE,
 };

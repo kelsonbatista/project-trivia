@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import TableApp from '../../components/Table';
@@ -12,6 +12,28 @@ function Feedback(props) {
     if (assertions < THREE) return 'Could be better...';
     return 'Well Done!';
   }
+
+  function handleRanking() {
+    console.log('run function');
+    let prevRanking = localStorage.getItem('ranking');
+
+    if (prevRanking === null) prevRanking = [];
+    else prevRanking = JSON.parse(prevRanking);
+
+    const player = {
+      name,
+      score: total,
+      picture: gravatarEmail,
+    };
+    if (Array.isArray(prevRanking)) {
+      prevRanking.push(player);
+      localStorage.setItem('ranking', JSON.stringify(prevRanking));
+    }
+  }
+
+  useEffect(() => {
+    handleRanking();
+  }, []);
 
   return (
     <section className="feedback">
