@@ -1,9 +1,6 @@
 .feedback {
   align-items: center;
-  background: url(../../assets/images/bg_ranking3.jpg) no-repeat center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+  background: url('../../assets/images/bg_ranking3.jpg') no-repeat center center;
   background-size: cover;
   color: white;
   display: flex;
@@ -47,15 +44,14 @@
 }
 
 .feedback__profile-score {
-  /* border: 5px solid #4bf07a; */
   border-radius: 10px;
   padding-right: 40px;
   text-align: right;
 }
 
 .feedback__body {
-  background: rgba(25,181,85, 0.5);
-  border-radius: 10px;  
+  background: rgba(25, 181, 85, 0.5);
+  border-radius: 10px;
   color: white;
   margin: 30px 0;
   padding: 20px 0;
@@ -78,7 +74,6 @@
 }
 
 .play__btn, .ranking__btn {
-  background: none;
   background: linear-gradient(#26d964, #0d9146);
   border: 5px solid #4bf07a;
   border-radius: 10px;

@@ -1,8 +1,5 @@
 body {
-  background: url(./assets/images/bg_main.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+  background: url('./assets/images/bg_main.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
@@ -23,16 +20,16 @@ body {
 
 /* https://codersblock.com/blog/creating-glow-effects-with-css/ */
 .login__glow {
-  background-color: #fff;
+
+  /* background-color: white; */
   border-radius: 50%;
-  box-shadow:
-    0 0 60px 30px #fff,  /* inner white */
-    0 0 100px 60px rgb(9, 255, 0), /* middle magenta */
-    0 0 140px 90px rgb(64, 255, 0); /* outer cyan */
+
+  /* box-shadow: 0 0 60px 30px white ,
+      0 0 100px 60px rgb(9, 255, 0) ,
+      0 0 140px 90px rgb(64, 255, 0); */
   height: 200px;
-  margin-top: -160px;
   margin-left: -1rem;
-  /* max-height: 30vh; */
+  margin-top: -160px;
   max-width: 50vw;
   position: absolute;
   width: 250px;
