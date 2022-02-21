@@ -1,0 +1,90 @@
+.feedback {
+  align-items: center;
+  background: url(../../assets/images/bg_ranking3.jpg) no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: white;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+}
+
+.feedback__left {
+  width: 47vw;
+}
+
+.feedback__right {
+  width: 35vw;
+}
+
+.feedback__header {
+  align-items: center;
+  display: flex;
+  font-size: 1.3rem;
+  font-weight: 700;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.feedback__profile {
+  background: linear-gradient(#26d964, #0d9146);
+  border: 5px solid #4bf07a;
+  border-radius: 10px;
+  height: 60px;
+  width: 100%;
+}
+
+.feedback__profile-picture {
+  text-align: center;
+  width: 15%;
+}
+
+.feedback__profile-image {
+  border-radius: 100%;
+  width: 2.5rem;
+}
+
+.feedback__profile-score {
+  /* border: 5px solid #4bf07a; */
+  border-radius: 10px;
+  padding-right: 40px;
+  text-align: right;
+}
+
+.feedback__body {
+  background: rgba(25,181,85, 0.5);
+  border-radius: 10px;  
+  color: white;
+  margin: 30px 0;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.feedback__body h3 {
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.feedback__body p {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.feedback__btn {
+  display: flex;
+  justify-content: space-between;
+}
+
+.play__btn, .ranking__btn {
+  background: none;
+  background: linear-gradient(#26d964, #0d9146);
+  border: 5px solid #4bf07a;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 1.6rem;
+  font-weight: 700;
+  padding: 8px 40px;
+}

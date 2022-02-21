@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+// import { decode } from 'he';
 import fetchTriviaApi from '../../services/triviaApi';
 import TableApp from '../../components/Table';
 import Button from '../../components/Button';
@@ -10,6 +11,7 @@ import Loading from '../../components/Loading';
 import { HALF, ONE, TWO, THREE, FOUR,
   TEN, THIRTY, THOUSAND } from '../../commons/constants';
 import './style.css';
+import logo from '../../assets/images/logo.png';
 
 function Game(props) {
   const interval = useRef();
@@ -104,6 +106,14 @@ function Game(props) {
   }
 
   function handleNext() {
+    // const player = {
+    //   name,
+    //   assertions,
+    //   score: 0,
+    //   total,
+    //   gravatarEmail,
+    // };
+    // dispatchPlayer(player);
     setCountQuestions(countQuestions + 1);
     setIndex(index + 1);
     setDisabled(false);
@@ -130,67 +140,90 @@ function Game(props) {
   }, [timer]);
 
   return (
-    <div className="App">
-      <header>
-        <h1>TRIVIA</h1>
-        <TableApp
-          name={ name }
-          score={ score }
-          gravatarEmail={ gravatarEmail }
-        />
-      </header>
-      <main>
-        { loading && <Loading />}
-        { questions.length > 0 && (
+    <div className="game">
+      <div className="game__left">
+        <header>
+          <img src={ logo } alt="Logo" className="game__logo" />
           <div>
-            <p data-testid="question-category">
-              { `Category: ${questions[index].category}` }
-            </p>
-            <p>{ `Time: ${timer}` }</p>
-            <p data-testid="question-text">
-              { questions[index].question }
-            </p>
-            <div data-testid="answer-options">
-              { /* // https://flaviocopes.com/how-to-shuffle-array-javascript/ */}
-              { answers.all.map((answer, item) => (
-                <Button
-                  className={ (answer === answers.correct
-                    ? 'correct'
-                    : 'incorrect') }
-                  dataTestid={ (answer === answers.correct
-                    ? 'correct-answer'
-                    : `wrong-answer-${item}`) }
-                  disabled={ disabled }
-                  key={ item }
-                  onClick={ (event) => handleClick(event) }
-                  text={ answer }
-                  type="button"
-                />
-              )) }
-            </div>
-            <div>
-              { (disabled && timeEnd)
-                && <p className="msg__timeup">Tempo esgotado! Resposta inválida.</p>}
-              { (disabled && answerIncorrect)
-                && <p className="msg__wrong">Infelizmente você errou!</p>}
-              { (disabled && answerCorrect)
-              && <p className="msg__right">Parabéns! Você acertou!</p>}
-              <p className="msg__correct">{ `Pontos: ${score} / Total: ${total}` }</p>
-            </div>
-            <div>
-              { disabled && (
-                <Button
-                  className="next"
-                  dataTestid="btn-next"
-                  onClick={ () => handleNext() }
-                  text="Next"
-                  type="button"
-                />
-              )}
-            </div>
+            <p className="game__score">{ `Pontos: ${score}` }</p>
+            <p className="game__total">{ `Total: ${total}` }</p>
+            { questions.length > 0 && (
+              <span className="game__category">
+                <p data-testid="question-category">
+                  { (questions[index].category) }
+                </p>
+              </span>
+            ) }
           </div>
-        )}
-      </main>
+          <div className="game__timer">
+            <div className="game__circle">&nbsp;</div>
+            <span>{ timer }</span>
+          </div>
+        </header>
+        <main>
+          { loading && <Loading />}
+          { questions.length > 0 && (
+            <div>
+              <div className="game__question">
+                <div data-testid="question-text" className="game__text">
+                  { (questions[index].question) }
+                </div>
+              </div>
+              <div className="game__answers" data-testid="answer-options">
+                { /* // https://flaviocopes.com/how-to-shuffle-array-javascript/ */}
+                { answers.all.map((answer, item) => (
+                  <Button
+                    className={ ((answer === answers.correct)
+                      ? 'correct game__answer-txt'
+                      : 'incorrect game__answer-txt') }
+                    dataTestid={ (answer === answers.correct
+                      ? 'correct-answer'
+                      : `wrong-answer-${item}`) }
+                    disabled={ disabled }
+                    index={ item }
+                    key={ item }
+                    onClick={ (event) => handleClick(event) }
+                    text={ answer }
+                    type="button"
+                  />
+                )) }
+              </div>
+              <div className="game__messages">
+                { (disabled && timeEnd)
+                && <p className="msg__timeup">Tempo esgotado! Resposta inválida.</p>}
+                { (disabled && answerIncorrect)
+                  && <p className="msg__wrong">Infelizmente você errou!</p>}
+                { (disabled && answerCorrect)
+                && <p className="msg__right">Parabéns! Você acertou!</p>}
+              </div>
+            </div>
+          )}
+          <div className="game__footer">
+            <TableApp
+              className="game__profile-name"
+              classPicture="game__profile-picture"
+              classPictureImage="game__profile-image"
+              classScore="game__profile-score"
+              classTable="game__profile"
+              name={ name }
+              score={ score }
+              gravatarEmail={ gravatarEmail }
+            />
+            { disabled && (
+              <Button
+                className="next"
+                dataTestid="btn-next"
+                onClick={ () => handleNext() }
+                text="Next"
+                type="button"
+              />
+            )}
+          </div>
+        </main>
+      </div>
+      <div className="game__right">
+        &nbsp;
+      </div>
     </div>
   );
 }

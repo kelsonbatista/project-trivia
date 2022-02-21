@@ -2,7 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function Button(props) {
-  const { className, dataTestid, disabled, id, key, name, onClick, type, text } = props;
+  const { className, dataTestid, disabled, id,
+    key, name, onClick, type, text } = props;
+
+  // const item = index + 1;
+  // const answerNumber = (<span className="game__answer-num">{ item }</span>);
+
+  // <span className="game__answer">
+  //     {item ? answerNumber : ''}
+  // </span>
 
   return (
     <button

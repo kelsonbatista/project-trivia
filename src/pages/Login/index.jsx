@@ -48,7 +48,7 @@ function Login(props) {
   return (
     <>
       <Input
-        classDiv="login"
+        classDiv="login__div"
         className="login__name"
         dataTestid="input-player-name"
         id="name"
@@ -59,7 +59,7 @@ function Login(props) {
         type="text"
       />
       <Input
-        classDiv="login"
+        classDiv="login__div"
         className="login__email"
         dataTestid="input-gravatar-email"
         id="email"
