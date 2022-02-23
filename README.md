@@ -1,13 +1,12 @@
 # Habilidades
 
-Nesse projeto, você será capaz de:
-
-  - Criar um store Redux em aplicações React
-  - Criar reducers no Redux em aplicações React
-  - Criar actions no Redux em aplicações React
-  - Criar dispatchers no Redux em aplicações React
-  - Conectar Redux aos componentes React
-  - Criar actions assíncronas na sua aplicação React que faz uso de Redux.
+  - Javascript, HTML, CSS
+  - Store Redux em aplicações React
+  - Reducers no Redux em aplicações React
+  - Actions no Redux em aplicações React
+  - Dispatchers no Redux em aplicações React
+  - Conexão do Redux aos componentes React
+  - Actions assíncronas na sua aplicação React que faz uso de Redux.
 ---
 ## Sobre o projeto
 
