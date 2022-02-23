@@ -1,14 +1,30 @@
-body {
+/* body {
   background: url('./assets/images/bg_main.jpg') no-repeat center center fixed;
   background-size: cover;
-}
+} */
 
 .login {
   align-items: center;
   display: flex;
   flex-direction: column;
+  height: 100vh;
   justify-content: center;
   width: 100vw;
+}
+
+.video-container {
+  height: 100vh;
+  position: relative;
+  width: 100vw;
+  z-index: -1;
+}
+
+.video-container video {
+  height: 100%;
+  object-fit: cover;
+  position: fixed;
+  width: 100%;
+  z-index: -1;
 }
 
 .login__logo {
