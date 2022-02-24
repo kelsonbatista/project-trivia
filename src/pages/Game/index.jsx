@@ -105,9 +105,11 @@ function Game(props) {
       handlePlay(rightAnswer[Math.floor(Math.random() * rightAnswer.length)]);
       dispatchPlayer(player);
       setAnswerCorrect(true);
+      console.log(answerCorrect, 'correct');
+      console.log(answerIncorrect, 'incorrect');
     } else {
       handlePlay(wrongAnswer[Math.floor(Math.random() * wrongAnswer.length)]);
-      setAnswerIncorrect(true);
+      setAnswerIncorrect(() => true);
     }
     setDisabled(true);
     clearInterval(interval.current);

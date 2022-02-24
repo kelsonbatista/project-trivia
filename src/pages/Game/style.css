@@ -205,3 +205,18 @@ header {
 .msg__timeup {
   color: red;
 }
+
+@media only screen and (max-width: 800px){
+  .game__left {
+    width: 100vw;
+  }
+
+  .game__right {
+    display: none;
+  }
+
+  .game__question {
+    -webkit-clip-path: polygon(0 0, 0 30vh, 100vw 30vh, 100vw 0);
+    width: 100vw;
+  }
+}
