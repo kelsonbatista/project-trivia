@@ -5,6 +5,8 @@ header {
 }
 
 .game {
+  background: url('../../assets/images/bg_main.jpg') no-repeat center center fixed;
+  background-size: cover;
   color: white;
   display: flex;
   justify-content: center;
@@ -17,10 +19,45 @@ header {
 }
 
 .game__right {
-  background: url('../../assets/images/portioli.png') no-repeat center center;
-  background-size: cover;
+  /* background: url('../../assets/images/portioli.png') no-repeat center center;
+  background-size: cover; */
   height: 100vh;
   width: 55vw;
+}
+
+.man1 {
+  background: url('../../assets/images/portioli1.jpg') no-repeat center center;
+  background-size: cover;
+}
+
+.man2 {
+  background: url('../../assets/images/portioli2.jpg') no-repeat center center;
+  background-size: cover;
+}
+
+.man3 {
+  background: url('../../assets/images/portioli3.jpg') no-repeat center center;
+  background-size: cover;
+}
+
+.man4 {
+  background: url('../../assets/images/portioli4.jpg') no-repeat center center;
+  background-size: cover;
+}
+
+.man5 {
+  background: url('../../assets/images/portioli5.jpg') no-repeat center center;
+  background-size: cover;
+}
+
+.man6 {
+  background: url('../../assets/images/portioli6.jpg') no-repeat center center;
+  background-size: cover;
+}
+
+.man7 {
+  background: url('../../assets/images/portioli7.jpg') no-repeat center center;
+  background-size: cover;
 }
 
 .game__logo {
@@ -50,8 +87,7 @@ header {
 
 .game__question {
   background: linear-gradient(#26d964, #0d9146);
-
-  /* -webkit-clip-path: polygon(0 0, 0 30vh, 50vw 30vh, 55vw 0); */
+  -webkit-clip-path: polygon(0 0, 0 30vh, 50vw 30vh, 55vw 0);
   margin-left: -2rem;
   padding: 18px 2rem;
   text-transform: uppercase;

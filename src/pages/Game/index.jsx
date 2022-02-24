@@ -1,23 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { decode } from 'he';
+import { decode } from 'he';
 import fetchTriviaApi from '../../services/triviaApi';
 import TableApp from '../../components/Table';
 import Button from '../../components/Button';
-import { requestToken, setPlayer } from '../../store/actions';
+import { requestToken, setGame, setPlayer } from '../../store/actions';
 import fetchToken from '../../services/token';
 import Loading from '../../components/Loading';
 import { HALF, ONE, TWO, THREE, FOUR,
   TEN, THIRTY, THOUSAND } from '../../commons/constants';
 import './style.css';
 import logo from '../../assets/images/logo.png';
+import { entrada, handleConversation,
+  handlePlay, rightAnswer, wrongAnswer } from './audio';
 
 function Game(props) {
   const interval = useRef();
   const { dispatchPlayer, dispatchToken, history,
     player: { name, assertions, score, total, gravatarEmail }, token } = props;
   const [questions, setQuestions] = useState([]);
+  // const [newQuestionSound, setNewQuestionSound] = useState(0);
   const [countQuestions, setCountQuestions] = useState(0);
   const [index, setIndex] = useState(0);
   const [timer, setTimer] = useState(THIRTY);
@@ -31,6 +34,8 @@ function Game(props) {
     incorrect: [],
     all: [],
   });
+
+  const man = ['man1', 'man2', 'man3', 'man4', 'man5', 'man6', 'man7'];
 
   async function handleTrivia() {
     setLoading(true);
@@ -72,6 +77,7 @@ function Game(props) {
     if (timer <= 0 && interval.current) {
       setDisabled(true);
       setTimeEnd(true);
+      handlePlay(wrongAnswer[Math.floor(Math.random() * wrongAnswer.length)]);
       clearInterval(interval.current);
     }
     if (timer === THIRTY) {
@@ -96,9 +102,11 @@ function Game(props) {
         total: total + (TEN + (timer * calcScore())),
         gravatarEmail,
       };
+      handlePlay(rightAnswer[Math.floor(Math.random() * rightAnswer.length)]);
       dispatchPlayer(player);
       setAnswerCorrect(true);
     } else {
+      handlePlay(wrongAnswer[Math.floor(Math.random() * wrongAnswer.length)]);
       setAnswerIncorrect(true);
     }
     setDisabled(true);
@@ -131,9 +139,21 @@ function Game(props) {
     handleTrivia();
   }, []);
 
+  // useEffect(() => { // did update - sempre
+  //   const game = {
+  //     timer,
+  //   };
+  //   dispatchTimer(game);
+  // });
+
   useEffect(() => { // did update
     handleAnswers();
   }, [questions]);
+
+  useEffect(() => { // did update
+    handlePlay(entrada);
+    if (!answerIncorrect && !answerCorrect) handleConversation();
+  }, [index]);
 
   useEffect(() => { // did update
     handleTimer();
@@ -150,7 +170,7 @@ function Game(props) {
             { questions.length > 0 && (
               <span className="game__category">
                 <p data-testid="question-category">
-                  { (questions[index].category) }
+                  { decode(questions[index].category) }
                 </p>
               </span>
             ) }
@@ -166,7 +186,8 @@ function Game(props) {
             <div>
               <div className="game__question">
                 <div data-testid="question-text" className="game__text">
-                  { (questions[index].question) }
+                  {/* { setNewQuestionSound(1) } */}
+                  { decode(questions[index].question) }
                 </div>
               </div>
               <div className="game__answers" data-testid="answer-options">
@@ -183,7 +204,7 @@ function Game(props) {
                     index={ item }
                     key={ item }
                     onClick={ (event) => handleClick(event) }
-                    text={ answer }
+                    text={ decode(answer) }
                     type="button"
                   />
                 )) }
@@ -221,7 +242,7 @@ function Game(props) {
           </div>
         </main>
       </div>
-      <div className="game__right">
+      <div className={ `game__right ${man[index]}` }>
         &nbsp;
       </div>
     </div>
@@ -243,6 +264,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   dispatchToken: (tokenInfo) => dispatch(requestToken(tokenInfo)),
   dispatchPlayer: (player) => dispatch(setPlayer(player)),
+  dispatchTimer: (timer) => dispatch(setGame(timer)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);
