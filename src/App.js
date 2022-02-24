@@ -1,16 +1,20 @@
 import React from 'react';
 import logo from './assets/images/logo.png';
-import localVideo from './assets/videos/intro.mp4';
+// import video from './assets/videos/intro.mp4';
 import './App.css';
 import Login from './pages/Login';
+
+// const video = 'https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_480_1_5MG.mp4';
+// const video = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
+const video = 'https://github.com/kelsonbatista/kelsonbatista.github.io/blob/version/1.0/assets/public/videos/intro.mp4?raw=true';
 
 function App() {
   return (
     <div>
       <header>
         <div className="video-container">
-          <video autoPlay muted loop>
-            <source src={ localVideo } type="video/mp4" />
+          <video autoPlay muted loop controls>
+            <source src={ video } type="video/mp4" />
             <track
               src="captions_en.vtt"
               kind="captions"
