@@ -13,7 +13,7 @@ function App() {
     <div>
       <header>
         <div className="video-container">
-          <video autoPlay muted loop controls>
+          <video autoPlay muted loop>
             <source src={ video } type="video/mp4" />
             <track
               src="captions_en.vtt"
