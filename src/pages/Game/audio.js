@@ -1,6 +1,3 @@
-// import React from 'react';
-// import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
 import somEntrada from '../../assets/audios/entrada.mp3';
 
 // Right answers
@@ -82,42 +79,23 @@ export const wrongAnswer = [wrong1, wrong2, wrong3, wrong4];
 
 export const entrada = new Audio(somEntrada);
 
-const TIME1 = 5000;
-const TIME2 = 10000;
-const TIME3 = 17000;
-const TIME4 = 23000;
+const TIME1 = 25;
+const TIME2 = 20;
+const TIME3 = 13;
+const TIME4 = 7;
 
 export function handlePlay(audio) {
   audio.currentTime = 0;
   return audio.play();
 }
 
-export function handleConversation() {
-  // const { game } = props;
-  // console.log(game, 'props');
-  setTimeout(() => {
-    handlePlay(conversation[Math.floor(Math.random() * conversation.length)]);
-  }, TIME1);
-
-  setTimeout(() => {
-    handlePlay(conversation[Math.floor(Math.random() * conversation.length)]);
-  }, TIME2);
-
-  setTimeout(() => {
-    handlePlay(conversation[Math.floor(Math.random() * conversation.length)]);
-  }, TIME3);
-
-  setTimeout(() => {
-    handlePlay(conversation[Math.floor(Math.random() * conversation.length)]);
-  }, TIME4);
+export function handleConversation(time) {
+  const audioFile = conversation[Math.floor(Math.random() * conversation.length)];
+  switch (time) {
+  case (TIME1): return handlePlay(audioFile);
+  case (TIME2): return handlePlay(audioFile);
+  case (TIME3): return handlePlay(audioFile);
+  case (TIME4): return handlePlay(audioFile);
+  default: return '';
+  }
 }
-
-// handleConversation.propTypes = {
-//   game: PropTypes.object,
-// }.isRequired;
-
-// const mapStateToProps = (state) => ({
-//   game: state.game,
-// });
-
-// export default connect(mapStateToProps, null)(handleConversation);

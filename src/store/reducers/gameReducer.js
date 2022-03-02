@@ -2,6 +2,7 @@ import { SET_GAME } from '../actions/gameActions';
 
 const INITIAL_STATE = {
   timer: 0,
+  finalAnswer: '',
 };
 
 const gameReducer = (state = INITIAL_STATE, action) => {

@@ -5,7 +5,7 @@ import { decode } from 'he';
 import fetchTriviaApi from '../../services/triviaApi';
 import TableApp from '../../components/Table';
 import Button from '../../components/Button';
-import { requestToken, setGame, setPlayer } from '../../store/actions';
+import { requestToken, setPlayer } from '../../store/actions';
 import fetchToken from '../../services/token';
 import Loading from '../../components/Loading';
 import { HALF, ONE, TWO, THREE, FOUR,
@@ -27,8 +27,8 @@ function Game(props) {
   const [timeEnd, setTimeEnd] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [answerIncorrect, setAnswerIncorrect] = useState(false);
-  const [answerCorrect, setAnswerCorrect] = useState(false);
+  const answerCorrect = useRef(false);
+  const answerIncorrect = useRef(false);
   const [answers, setAnswers] = useState({
     correct: '',
     incorrect: [],
@@ -104,31 +104,21 @@ function Game(props) {
       };
       handlePlay(rightAnswer[Math.floor(Math.random() * rightAnswer.length)]);
       dispatchPlayer(player);
-      setAnswerCorrect(true);
-      console.log(answerCorrect, 'correct');
-      console.log(answerIncorrect, 'incorrect');
+      answerCorrect.current = true;
     } else {
       handlePlay(wrongAnswer[Math.floor(Math.random() * wrongAnswer.length)]);
-      setAnswerIncorrect(() => true);
+      answerIncorrect.current = true;
     }
     setDisabled(true);
     clearInterval(interval.current);
   }
 
   function handleNext() {
-    // const player = {
-    //   name,
-    //   assertions,
-    //   score: 0,
-    //   total,
-    //   gravatarEmail,
-    // };
-    // dispatchPlayer(player);
     setCountQuestions(countQuestions + 1);
     setIndex(index + 1);
     setDisabled(false);
-    setAnswerIncorrect(false);
-    setAnswerCorrect(false);
+    answerCorrect.current = false;
+    answerIncorrect.current = false;
     setTimer(THIRTY);
     handleAnswers();
     if (countQuestions === FOUR) {
@@ -141,24 +131,17 @@ function Game(props) {
     handleTrivia();
   }, []);
 
-  // useEffect(() => { // did update - sempre
-  //   const game = {
-  //     timer,
-  //   };
-  //   dispatchTimer(game);
-  // });
-
   useEffect(() => { // did update
     handleAnswers();
   }, [questions]);
 
   useEffect(() => { // did update
     handlePlay(entrada);
-    if (!answerIncorrect && !answerCorrect) handleConversation();
   }, [index]);
 
   useEffect(() => { // did update
     handleTimer();
+    handleConversation(timer);
   }, [timer]);
 
   return (
@@ -214,9 +197,9 @@ function Game(props) {
               <div className="game__messages">
                 { (disabled && timeEnd)
                 && <p className="msg__timeup">Tempo esgotado! Resposta inválida.</p>}
-                { (disabled && answerIncorrect)
+                { (disabled && answerIncorrect.current)
                   && <p className="msg__wrong">Infelizmente você errou!</p>}
-                { (disabled && answerCorrect)
+                { (disabled && answerCorrect.current)
                 && <p className="msg__right">Parabéns! Você acertou!</p>}
               </div>
             </div>
@@ -266,7 +249,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   dispatchToken: (tokenInfo) => dispatch(requestToken(tokenInfo)),
   dispatchPlayer: (player) => dispatch(setPlayer(player)),
-  dispatchTimer: (timer) => dispatch(setGame(timer)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);
