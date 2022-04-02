@@ -7,6 +7,8 @@ This is a question and answer game based on the **Trivia** game _(similar to the
   - Be redirected, after 5 questions answered, to the score screen, where the text shown depends on the number of hits.
   - View the ranking page at the end of each game.
 
+---
+
 *Esse é um jogo de perguntas e respostas baseado no jogo **Trivia** _(similar ao show do milhão americano)_ utilizando _React e Redux_, desenvolvendo em grupo suas funcionalidades de acordo com as demandas definidas em um quadro _Kanban, para organizar o trabalho com o grupo e para que se minimizem os conflitos de código. Na aplicação a pessoa usuária poderá:*
 
   - *Logar no jogo e, se o email tiver cadastro no site [Gravatar](https://pt.gravatar.com/), ter sua foto associada ao perfil da pessoa usuária.*
